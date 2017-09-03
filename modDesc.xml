@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<modDesc descVersion="31">
+    <author>Grisu118 - Vertexdezign</author>
+    <version>1.0</version>
+    <title>
+        <en>RealClock Mod</en>
+        <de>Echte Uhrzeit Mod</de>
+    </title>
+    <description>
+        <en><![CDATA[Shows the current real time in the upper right corner.]]></en>
+        <de><![CDATA[Zeigt die aktuelle echte Uhrzeit oben rechts im Spiel an.]]></de>
+    </description>
+    <iconFilename>store_clock.png</iconFilename>
+    <multiplayer supported="true" />
+    <extraSourceFiles>
+		<sourceFile filename="RealClock.lua" />
+	</extraSourceFiles>
+</modDesc>
