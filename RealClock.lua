@@ -1,7 +1,7 @@
 -- RealClock
 --
 -- @author  Grisu118 - VertexDezign.net
--- @history		v1.0 	- 2016-10-25 - Initial implementation
+-- @history     v1.0    - 2016-10-25 - Initial implementation
 --              v1.1    - 2017-09-11 - Add use of UI Scale
 -- @Descripion: Shows the real time clock in the upper right corner
 -- @web: http://grisu118.ch or http://vertexdezign.net
