@@ -1,14 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
-<modDesc descVersion="31">
+<modDesc descVersion="37">
     <author>Grisu118 - Vertexdezign</author>
-    <version>1.1</version>
+    <version>1.1.0</version>
     <title>
         <en>RealClock Mod</en>
         <de>Echte Uhrzeit Mod</de>
     </title>
     <description>
-        <en><![CDATA[Shows the current real time in the upper right corner.]]></en>
-        <de><![CDATA[Zeigt die aktuelle echte Uhrzeit oben rechts im Spiel an.]]></de>
+        <en>
+<![CDATA[Shows the current real time in the upper right corner.
+
+Changelog:
+v1.1.0.0
++ Add support for UI Scale setting
+]]>
+        </en>
+        <de>
+<![CDATA[Zeigt die aktuelle echte Uhrzeit oben rechts im Spiel an.
+
+Changelog:
+v1.1.0.0
++ Unterstützung für uiScale Einstellung hinzugefügt.
+]]>
+        </de>
     </description>
     <iconFilename>store_clock.png</iconFilename>
     <multiplayer supported="true" />
