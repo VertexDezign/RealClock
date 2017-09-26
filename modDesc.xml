@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <modDesc descVersion="37">
     <author>Grisu118 - Vertexdezign</author>
-    <version>1.1.0</version>
+    <version>2.0</version>
     <title>
         <en>RealClock Mod</en>
         <de>Echte Uhrzeit Mod</de>
@@ -10,7 +10,17 @@
         <en>
 <![CDATA[Shows the current real time in the upper right corner.
 
+This script creates a configuration xml at first startup in your modfolder. There you can adjust the following:
+  * Position <position isDynamic="bool" x="[0,1]" y="[0,1]"/>
+  * Color and size of text <rendering color="black|white|r,g,b,a" fontSize="[0,1]"/>
+  * Format of datetime string (placeholders like here in os.date -> https://www.lua.org/pil/22.1.html)
+
+Additional Credits:
+  * Slivicon (Config XML)
+
 Changelog:
+v2.0.0.0
++ Add config file
 v1.1.0.0
 + Add support for UI Scale setting
 ]]>
@@ -18,7 +28,17 @@ v1.1.0.0
         <de>
 <![CDATA[Zeigt die aktuelle echte Uhrzeit oben rechts im Spiel an.
 
+Das Script erstellt beim ersten Start eine xml Datei im Mod Ordner. Dort könnt ich folgende dinge anpassen:
+  * Position <position isDynamic="bool" x="[0,1]" y="[0,1]"/>
+  * Farbe und Grösse vom Text <rendering color="black|white|r,g,b,a" fontSize="[0,1]"/>
+  * Format des Strings (Platzhalter sind wie bei os.date -> https://www.lua.org/pil/22.1.html)
+
+Additional Credits:
+  * Slivicon (Config XML)
+
 Changelog:
+v2.0.0.0
++ xml Konfiguration
 v1.1.0.0
 + Unterstützung für uiScale Einstellung hinzugefügt.
 ]]>
@@ -27,6 +47,7 @@ v1.1.0.0
     <iconFilename>store_clock.png</iconFilename>
     <multiplayer supported="true" />
     <extraSourceFiles>
+		<sourceFile filename="GrisuDebug.lua" />
 		<sourceFile filename="RealClock.lua" />
 	</extraSourceFiles>
 </modDesc>
