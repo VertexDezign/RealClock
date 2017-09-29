@@ -79,14 +79,14 @@ function RealClock:draw()
   local fontSize = g_gameSettings:getValue("uiScale") * self.rendering.fontSize
   local date = getDate(self.timeFormat)
   local posX = self.position.x
-  local poxY = self.position.y
+  local posY = self.position.y
   if self.position.dynamic then
     local width = getTextWidth(fontSize, date)
     local height = getTextHeight(fontSize, date)
     posX = 0.99 - width
-    poxY = 1 - height
+    posY = 1 - height
   end
-  renderText(posX, poxY, fontSize, date)
+  renderText(posX, posY, fontSize, date)
   setTextColor(1, 1, 1, 1)
 end
 
@@ -108,7 +108,7 @@ end
 
 function RealClock:writeDefaultConfig(fileName)
   self.debugger:info(function()
-    return "Write defautl Config to " .. fileName
+    return "Write default Config to " .. fileName
   end)
   local xml = createXMLFile("RealClock", fileName, "RealClock");
   setXMLBool(xml, "RealClock.position#isDynamic", RealClock.d.position.dynamic)
