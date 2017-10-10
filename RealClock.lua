@@ -117,7 +117,6 @@ function RealClock:writeDefaultConfig(fileName)
   setXMLString(xml, "RealClock.rendering#color", RealClock.d.rendering.color)
   setXMLFloat(xml, "RealClock.rendering#fontSize", RealClock.d.rendering.fontSize)
   setXMLString(xml, "RealClock.format#string", RealClock.d.timeFormat)
-  setXMLString(xml, "RealClock.format#see", "https://www.lua.org/pil/22.1.html")
   saveXMLFile(xml)
   delete(xml)
 end
