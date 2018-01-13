@@ -27,7 +27,7 @@ for itself and its publishers and licensors hereby disclaims all express or impl
 including without limitation warranties of merchantability, fitness for a particular purpose,
 performance, accuracy, reliability, and non-infringement.
 
-The Terms and Conditions of GIANTS Software GmbH also apply.
+The [Terms and Conditions of GIANTS Software GmbH](https://www.farming-simulator.com/termsModHub.php) also apply.
 
 ## Informal explanation
 

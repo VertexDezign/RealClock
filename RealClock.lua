@@ -5,11 +5,10 @@
 -- @history       v1.0    - 2016-10-25 - Initial implementation
 --                v1.1    - 2017-09-11 - Add use of UI Scale
 --                v2.0    - 2017-09-23 - Add config xml
+--                v2.0.1  - 2018-01-13 - Do not render clock when renderTime is false
 -- @descripion:   Shows the real time clock in the upper right corner
 -- @web:          http://grisu118.ch or http://vertexdezign.net
 -- Copyright (C) Grisu118, All Rights Reserved.
-
-
 
 RealClock = {}
 RealClock.configFileName = "realClock.xml"
@@ -28,7 +27,7 @@ local function protect(tbl)
     __index = tbl,
     __newindex = function(t, key, value)
       error("attempting to change constant " ..
-          tostring(key) .. " to " .. tostring(value), 2)
+        tostring(key) .. " to " .. tostring(value), 2)
     end
   })
 end
@@ -74,6 +73,10 @@ function RealClock:update(dt)
 end
 
 function RealClock:draw()
+  if g_dedicatedServerInfo ~= nil or not g_currentMission.renderTime then
+    return
+  end
+
   local r, g, b, a = self:getColor(self.rendering.color)
   setTextColor(r, g, b, a)
   local fontSize = g_gameSettings:getValue("uiScale") * self.rendering.fontSize
