@@ -1,6 +1,6 @@
 # RealClock
 
-[![ModHub Download](https://img.shields.io/badge/ModHub-2.0.0.0-blue.svg?style=flat-square)](https://farming-simulator.com/mod.php?lang=de&country=ch&mod_id=51459&title=fs2017)
+[![ModHub Download](https://img.shields.io/badge/ModHub-2.0.1.0-blue.svg?style=flat-square)](https://farming-simulator.com/mod.php?lang=de&country=ch&mod_id=51459&title=fs2017)
 
 A small script, which shows the actual time in the upper right corner.
 
