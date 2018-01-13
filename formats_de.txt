@@ -1,0 +1,19 @@
+Mögliche Formate
+%a	Wochentag abgekürzt (z.B., Wed)
+%A	Wochentag ausgeschrieben (z.B., Wednesday)
+%b	Monat abgekürzt (z.B., Sep)
+%B	Monat ausgeschrieben (z.B., September)
+%c	Tag und zeit (z.B., 09/16/98 23:48:10)
+%d	Tag des monats (16) [01-31]
+%H	Stunde, 24h modus (23) [00-23]
+%I	Stunde, 12h modus (11) [01-12]
+%M	Minute (48) [00-59]
+%m	Monat (09) [01-12]
+%p	entweder "am" oder "pm" (pm)
+%S	Sekunde (10) [00-61]
+%w	Wochentag (3) [0-6 = Sunday-Saturday]
+%x	Datum (e.g., 09/16/98)
+%X	Zeit (e.g., 23:48:10)
+%Y	volles Jahr (1998)
+%y	zweistelliges Jahr (98) [00-99]
+%%	Das Zeichen `%´

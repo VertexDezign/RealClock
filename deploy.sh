@@ -9,7 +9,7 @@ if [ -f $ZIPNAME ]; then
 fi
 
 echo "Create new zip"
-"C:\Program Files\7-Zip\7z.exe" a -x!*.sh -x!.git -x!LICENSE -x!*.zip -tzip $ZIPNAME *
+"C:\Program Files\7-Zip\7z.exe" a -x!*.sh -x!.git -x!LICENSE -x!*.zip -x!*.md -tzip $ZIPNAME *
 
 echo "Copy to mods directory"
 cp -f $ZIPNAME "$MOD_DIR"
