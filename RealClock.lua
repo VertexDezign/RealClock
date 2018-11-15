@@ -20,7 +20,7 @@ RealClock.d.position.x = 0.9
 RealClock.d.position.y = 0.98
 RealClock.d.rendering = {}
 RealClock.d.rendering.color = "white"
-RealClock.d.rendering.fontSize = 0.02
+RealClock.d.rendering.fontSize = 0.015
 
 local function protect(tbl)
   return setmetatable({}, {
