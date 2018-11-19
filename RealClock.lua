@@ -100,7 +100,7 @@ function RealClock:getColor(source)
   elseif color == "black" then
     return 0, 0, 0, 1
   else
-    local splitted = Utils.splitString(",", color)
+    local splitted = StringUtil.splitString(",", color)
     local colors = {}
     for _, v in pairs(splitted) do
       table.insert(colors, tonumber(v))
@@ -130,18 +130,27 @@ function RealClock:setValuesFromXML(fileName)
   end)
   local xml = loadXMLFile("RealClock", fileName)
   self.position.dynamic = Utils.getNoNil(getXMLBool(xml, "RealClock.position#isDynamic"), RealClock.d.position.dynamic);
+  self.debugger:debug(function()
+    return "Position.dynamic: " .. tostring(self.position.dynamic)
+  end)
   local x = Utils.getNoNil(getXMLFloat(xml, "RealClock.position#x"), RealClock.d.position.x)
+  self.debugger:debug(function()
+    return "Position.x: " .. tostring(x)
+  end)
   if (self:validateFloat(x, "x")) then
-    self.rendering.x = x
+    self.position.x = x
   end
   local y = Utils.getNoNil(getXMLFloat(xml, "RealClock.position#y"), RealClock.d.position.y)
+  self.debugger:debug(function()
+    return "Position.y: " .. tostring(y)
+  end)
   if (self:validateFloat(y, "y")) then
-    self.rendering.y = y
+    self.position.y = y
   end
   local color = Utils.getNoNil(getXMLString(xml, "RealClock.rendering#color"), RealClock.d.rendering.color)
   -- validate color
   if color:lower() ~= "white" and color:lower() ~= "black" then
-    local c = Utils.splitString(",", color)
+    local c = StringUtil.splitString(",", color)
     if table.getn(c) == 4 then
       local valid = true
       for _, v in pairs(c) do
