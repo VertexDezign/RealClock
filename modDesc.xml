@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
-<modDesc descVersion="39">
+<modDesc descVersion="41">
     <author>Grisu118 - Vertexdezign, Slivicon</author>
-    <version>2.0.1.0</version>
+    <version>1.0.0.0</version>
     <title>
         <en>RealClock Mod</en>
         <de>Echte Uhrzeit Mod</de>
@@ -15,13 +15,6 @@ This script creates a configuration xml at first startup in your modfolder. Ther
   * Color and size of text <rendering color="black|white|r,g,b,a" fontSize="[0,1]"/>
   * Format of datetime string (placeholders see formats_en.txt)
 
-Changelog:
-v2.0.1.0
-+ Do not render if renderTime is false
-v2.0.0.0
-+ Add config file
-v1.1.0.0
-+ Add support for UI Scale setting
 ]]>
         </en>
         <de>
@@ -32,13 +25,6 @@ Das Script erstellt beim ersten Start eine xml Datei im Mod Ordner. Dort könnt 
   * Farbe und Grösse vom Text <rendering color="black|white|r,g,b,a" fontSize="[0,1]"/>
   * Format des Strings (Formatierungsmöglichkeiten siehe formats_de.txt)
 
-Changelog:
-v2.0.1.0
-+ Die Uhrzeit wird nur noch angezeigt wenn auch die ingame Zeit eingeblendet ist
-v2.0.0.0
-+ xml Konfiguration
-v1.1.0.0
-+ Unterstützung für uiScale Einstellung hinzugefügt.
 ]]>
         </de>
     </description>
