@@ -6,6 +6,7 @@
 --                v1.1    - 2017-09-11 - Add use of UI Scale
 --                v2.0    - 2017-09-23 - Add config xml
 --                v2.0.1  - 2018-01-13 - Do not render clock when renderTime is false
+--                v2.1    - 2019-01-14 - Move settings file to modSettings folder
 -- @descripion:   Shows the real time clock in the upper right corner
 -- @web:          http://grisu118.ch or http://vertexdezign.net
 -- Copyright (C) Grisu118, All Rights Reserved.
@@ -53,8 +54,13 @@ function RealClock:loadMap(name)
   if g_dedicatedServerInfo == nil then
     local xmlFile = g_modsDirectory .. "/" .. RealClock.configFileName;
     if not fileExists(xmlFile) then
-      self:writeDefaultConfig(xmlFile);
+      local newXmlFile = getUserProfileAppPath() .. "modsSettings/" .. RealClock.configFileName;
+      if not fileExists(newXmlFile) then
+        self:writeDefaultConfig(newXmlFile);
+      end
+      self:setValuesFromXML(newXmlFile)
     else
+      self.debugger:warn("Loading configuration from mod folder, this is deprecated and will be removed in a furhter version. Move your " .. RealClock.configFileName .. " in the modSettings folder.")
       self:setValuesFromXML(xmlFile);
     end
   end
