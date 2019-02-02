@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <modDesc descVersion="41">
     <author>Vertexdezign, Slivicon</author>
-    <version>1.0.1.0</version>
+    <version>1.1.0.0</version>
     <title>
         <en>RealClock Mod</en>
         <de>Echte Uhrzeit Mod</de>
@@ -26,6 +26,7 @@ This script creates a configuration xml at first startup in your modfolder. Ther
 Changelog 1.1.0.0:
 - Improve description
 - Move settings xml to modSettings folder 
+- Hide clock if huds hidden (gsToggleNoHudAndFlightMode)
 ]]>
         </en>
         <de>
@@ -47,6 +48,7 @@ Das Script erstellt beim ersten Start eine xml Datei im Mod Ordner. Dort könnt 
 Changelog 1.1.0.0:
 - Verbesserte Beschreibung
 - Verschieben der settings xml in den modSettings Ordner
+- Die Uhr wird nicht mehr angezeigt wenn der noHud modus aktiv ist (via Konsole)
 ]]>
         </de>
     </description>
