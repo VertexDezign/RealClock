@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <modDesc descVersion="41">
-    <author>Vertexdezign, Slivicon</author>
-    <version>1.1.0.0</version>
+    <author>VertexDezign and Slivicon</author>
+    <version>1.1.1.0</version>
     <title>
         <en>RealClock Mod</en>
         <de>Echte Uhrzeit Mod</de>
@@ -23,6 +23,8 @@ This script creates a configuration xml at first startup in your modfolder. Ther
     * fontSize: the size of the font to display, a value in the range [0..1], default 0.015. UI Scale is used for calculating the font size to display
   * Format of datetime string (placeholders see formats_en.txt)
 
+Changelog 1.1.1.0:
+- Create modSettings folder if not existent
 Changelog 1.1.0.0:
 - Improve description
 - Move settings xml to modSettings folder 
@@ -45,6 +47,8 @@ Das Script erstellt beim ersten Start eine xml Datei im Mod Ordner. Dort könnt 
     * fontSize: Die grösse der Schrift, ein wert im Bereich [0..1], Standart ist 0.015. UI Skalierung wird mit einbezogen bei der Darstellung!
   * Format des Strings (Formatierungsmöglichkeiten siehe formats_de.txt)
 
+Changelog 1.1.1.0:
+- modSettings Ordner wird erstellt, falls er noch nicht existiert
 Changelog 1.1.0.0:
 - Verbesserte Beschreibung
 - Verschieben der settings xml in den modSettings Ordner
