@@ -7,13 +7,14 @@
 --                v2.0    - 2017-09-23 - Add config xml
 --                v2.0.1  - 2018-01-13 - Do not render clock when renderTime is false
 --                v2.1    - 2019-01-14 - Move settings file to modSettings folder, do not draw when showTime is false
+--                v2.1.1  - 2019-04-01 - Create modSettings folder
 -- @descripion:   Shows the real time clock in the upper right corner
 -- @web:          http://grisu118.ch or http://vertexdezign.net
 -- Copyright (C) Grisu118, All Rights Reserved.
 
 RealClock = {}
 RealClock.configFileName = "realClock.xml"
-RealClock.d = {};
+RealClock.d = {}
 RealClock.d.timeFormat = "%H:%M:%S"
 RealClock.d.position = {}
 RealClock.d.position.dynamic = true
@@ -24,13 +25,15 @@ RealClock.d.rendering.color = "white"
 RealClock.d.rendering.fontSize = 0.015
 
 local function protect(tbl)
-  return setmetatable({}, {
-    __index = tbl,
-    __newindex = function(t, key, value)
-      error("attempting to change constant " ..
-        tostring(key) .. " to " .. tostring(value), 2)
-    end
-  })
+  return setmetatable(
+    {},
+    {
+      __index = tbl,
+      __newindex = function(t, key, value)
+        error("attempting to change constant " .. tostring(key) .. " to " .. tostring(value), 2)
+      end
+    }
+  )
 end
 
 -- Protect the defaults, nobody should overwrite them!
@@ -52,16 +55,21 @@ function RealClock:loadMap(name)
   self.timeFormat = RealClock.d.timeFormat
 
   if g_dedicatedServerInfo == nil then
-    local xmlFile = g_modsDirectory .. "/" .. RealClock.configFileName;
+    local xmlFile = g_modsDirectory .. "/" .. RealClock.configFileName
     if not fileExists(xmlFile) then
-      local newXmlFile = getUserProfileAppPath() .. "modsSettings/" .. RealClock.configFileName;
+      local modSettingsDir = getUserProfileAppPath() .. "modsSettings"
+      local newXmlFile = modSettingsDir .. RealClock.configFileName
       if not fileExists(newXmlFile) then
-        self:writeDefaultConfig(newXmlFile);
+        createFolder(modSettingsDir)
+        self:writeDefaultConfig(newXmlFile)
       end
       self:setValuesFromXML(newXmlFile)
     else
-      self.debugger:warn("Loading configuration from mod folder, this is deprecated and will be removed in a furhter version. Move your " .. RealClock.configFileName .. " in the modSettings folder.")
-      self:setValuesFromXML(xmlFile);
+      self.debugger:warn(
+        "Loading configuration from mod folder, this is deprecated and will be removed in a furhter version. Move your " ..
+          RealClock.configFileName .. " in the modSettings folder."
+      )
+      self:setValuesFromXML(xmlFile)
     end
   end
 end
@@ -116,10 +124,12 @@ function RealClock:getColor(source)
 end
 
 function RealClock:writeDefaultConfig(fileName)
-  self.debugger:info(function()
-    return "Write default Config to " .. fileName
-  end)
-  local xml = createXMLFile("RealClock", fileName, "RealClock");
+  self.debugger:info(
+    function()
+      return "Write default Config to " .. fileName
+    end
+  )
+  local xml = createXMLFile("RealClock", fileName, "RealClock")
   setXMLBool(xml, "RealClock.position#isDynamic", RealClock.d.position.dynamic)
   setXMLFloat(xml, "RealClock.position#x", RealClock.d.position.x)
   setXMLFloat(xml, "RealClock.position#y", RealClock.d.position.y)
@@ -131,25 +141,33 @@ function RealClock:writeDefaultConfig(fileName)
 end
 
 function RealClock:setValuesFromXML(fileName)
-  self.debugger:info(function()
-    return "Read from xml " .. fileName
-  end)
+  self.debugger:info(
+    function()
+      return "Read from xml " .. fileName
+    end
+  )
   local xml = loadXMLFile("RealClock", fileName)
-  self.position.dynamic = Utils.getNoNil(getXMLBool(xml, "RealClock.position#isDynamic"), RealClock.d.position.dynamic);
-  self.debugger:debug(function()
-    return "Position.dynamic: " .. tostring(self.position.dynamic)
-  end)
+  self.position.dynamic = Utils.getNoNil(getXMLBool(xml, "RealClock.position#isDynamic"), RealClock.d.position.dynamic)
+  self.debugger:debug(
+    function()
+      return "Position.dynamic: " .. tostring(self.position.dynamic)
+    end
+  )
   local x = Utils.getNoNil(getXMLFloat(xml, "RealClock.position#x"), RealClock.d.position.x)
-  self.debugger:debug(function()
-    return "Position.x: " .. tostring(x)
-  end)
+  self.debugger:debug(
+    function()
+      return "Position.x: " .. tostring(x)
+    end
+  )
   if (self:validateFloat(x, "x")) then
     self.position.x = x
   end
   local y = Utils.getNoNil(getXMLFloat(xml, "RealClock.position#y"), RealClock.d.position.y)
-  self.debugger:debug(function()
-    return "Position.y: " .. tostring(y)
-  end)
+  self.debugger:debug(
+    function()
+      return "Position.y: " .. tostring(y)
+    end
+  )
   if (self:validateFloat(y, "y")) then
     self.position.y = y
   end
@@ -171,9 +189,12 @@ function RealClock:setValuesFromXML(fileName)
         self.rendering.color = RealClock.d.rendering.color
       end
     else
-      self.debugger:warn(function()
-        return "Invalid value for color, only 'white', 'black' or a custom color like '0,0.5,1,0.8' allowed, found " .. color
-      end)
+      self.debugger:warn(
+        function()
+          return "Invalid value for color, only 'white', 'black' or a custom color like '0,0.5,1,0.8' allowed, found " ..
+            color
+        end
+      )
       self.rendering.color = RealClock.d.rendering.color
     end
   else
@@ -182,7 +203,7 @@ function RealClock:setValuesFromXML(fileName)
 
   local fontSize = Utils.getNoNil(getXMLFloat(xml, "RealClock.rendering#fontSize"), RealClock.d.rendering.fontSize)
   if self:validateFloat(fontSize, "fontSize") then
-    self.rendering.fontSize = fontSize;
+    self.rendering.fontSize = fontSize
   end
   self.timeFormat = Utils.getNoNil(getXMLString(xml, "RealClock.format#string"), RealClock.d.timeFormat)
   delete(xml)
@@ -193,9 +214,11 @@ function RealClock:validateFloat(float, text)
   if f ~= nil and f >= 0 and f <= 1 then
     return true
   else
-    self.debugger:warn(function()
-      return "Invalid value for " .. text .. ", must be a value between 0 and 1 including both, was " .. float
-    end)
+    self.debugger:warn(
+      function()
+        return "Invalid value for " .. text .. ", must be a value between 0 and 1 including both, was " .. float
+      end
+    )
     return false
   end
 end
