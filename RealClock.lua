@@ -58,10 +58,19 @@ function RealClock:loadMap(name)
     local xmlFile = g_modsDirectory .. "/" .. RealClock.configFileName
     if not fileExists(xmlFile) then
       local modSettingsDir = getUserProfileAppPath() .. "modsSettings"
-      local newXmlFile = modSettingsDir .. RealClock.configFileName
+      local newXmlFile = modSettingsDir .. "/" .. RealClock.configFileName
       if not fileExists(newXmlFile) then
         createFolder(modSettingsDir)
-        self:writeDefaultConfig(newXmlFile)
+
+        -- Special handling for wrongly named file
+        local wrongNamedFile = modSettingsDir .. RealClock.configFileName
+        if (fileExists(wrongNamedFile)) then
+          self:setValuesFromXML(wrongNamedFile)
+          self:writeCurrentConfig(newXmlFile)
+          self.debugger:warn("Config file created at correct place, you can safely delete the old file: " .. wrongNamedFile)
+        else
+          self:writeDefaultConfig(newXmlFile)
+        end
       end
       self:setValuesFromXML(newXmlFile)
     else
@@ -136,6 +145,23 @@ function RealClock:writeDefaultConfig(fileName)
   setXMLString(xml, "RealClock.rendering#color", RealClock.d.rendering.color)
   setXMLFloat(xml, "RealClock.rendering#fontSize", RealClock.d.rendering.fontSize)
   setXMLString(xml, "RealClock.format#string", RealClock.d.timeFormat)
+  saveXMLFile(xml)
+  delete(xml)
+end
+
+function RealClock:writeCurrentConfig(fileName)
+  self.debugger:info(
+    function()
+      return "Write current Config to " .. fileName
+    end
+  )
+  local xml = createXMLFile("RealClock", fileName, "RealClock")
+  setXMLBool(xml, "RealClock.position#isDynamic", self.position.dynamic)
+  setXMLFloat(xml, "RealClock.position#x", self.position.x)
+  setXMLFloat(xml, "RealClock.position#y", self.position.y)
+  setXMLString(xml, "RealClock.rendering#color", self.rendering.color)
+  setXMLFloat(xml, "RealClock.rendering#fontSize", self.rendering.fontSize)
+  setXMLString(xml, "RealClock.format#string", self.timeFormat)
   saveXMLFile(xml)
   delete(xml)
 end
