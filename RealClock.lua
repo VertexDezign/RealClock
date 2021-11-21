@@ -8,6 +8,7 @@
 --                v2.0.1  - 2018-01-13 - Do not render clock when renderTime is false
 --                v2.1    - 2019-01-14 - Move settings file to modSettings folder, do not draw when showTime is false
 --                v2.1.1  - 2019-04-01 - Create modSettings folder
+--                v3.0    - 2021-11-19 - FS22
 -- @descripion:   Shows the real time clock in the upper right corner
 -- @web:          http://grisu118.ch or http://vertexdezign.net
 -- Copyright (C) Grisu118, All Rights Reserved.
@@ -41,7 +42,7 @@ RealClock.d = protect(RealClock.d)
 
 function RealClock:loadMap(name)
   self.debugger = GrisuDebug:create("RealClock")
-  self.debugger:setLogLvl(GrisuDebug.INFO)
+  self.debugger:setLogLvl(GrisuDebug.DEBUG)
 
   self.debugger:info("RealClock loading")
 
@@ -57,7 +58,7 @@ function RealClock:loadMap(name)
   if g_dedicatedServerInfo == nil then
     local xmlFile = g_modsDirectory .. "/" .. RealClock.configFileName
     if not fileExists(xmlFile) then
-      local modSettingsDir = getUserProfileAppPath() .. "modsSettings"
+      local modSettingsDir = getUserProfileAppPath() .. "modSettings"
       local newXmlFile = modSettingsDir .. "/" .. RealClock.configFileName
       if not fileExists(newXmlFile) then
         createFolder(modSettingsDir)
@@ -96,12 +97,13 @@ function RealClock:update(dt)
 end
 
 function RealClock:draw()
-  if g_dedicatedServerInfo ~= nil or not g_currentMission.renderTime or not g_currentMission.hud.showTime then
+  if g_dedicatedServerInfo ~= nil or not g_currentMission.hud.showTime then
     return
   end
 
   local r, g, b, a = self:getColor(self.rendering.color)
   setTextColor(r, g, b, a)
+  setTextBold(false)
   local fontSize = g_gameSettings:getValue("uiScale") * self.rendering.fontSize
   local date = getDate(self.timeFormat)
   local posX = self.position.x

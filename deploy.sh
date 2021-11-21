@@ -1,7 +1,7 @@
 #!/bin/sh
 
-ZIPNAME="FS19_real_clock.zip"
-MOD_DIR="C:\Users\benjamin\Documents\My Games\FarmingSimulator2019\mods"
+ZIPNAME="FS22_real_clock.zip"
+MOD_DIR="C:\Users\benjamin\Documents\My Games\FarmingSimulator2022\mods"
 
 if [ -f $ZIPNAME ]; then
     echo "Remove old zip"
