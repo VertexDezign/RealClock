@@ -10,7 +10,7 @@
         <en>
 <![CDATA[Shows the current real time in the upper right corner.
 
-This script creates a configuration xml at first startup in your modfolder. There you can adjust the following:
+This script creates a configuration xml at first startup in your modSettings folder. There you can adjust the following:
   * Position <position isDynamic="bool" x="[0,1]" y="[0,1]"/>
     * isDynamic
         true: automatically position the text in the upper right corner considering his dimensions, ignore x and y
@@ -27,7 +27,7 @@ This script creates a configuration xml at first startup in your modfolder. Ther
         <de>
 <![CDATA[Zeigt die aktuelle echte Uhrzeit oben rechts im Spiel an.
 
-Das Script erstellt beim ersten Start eine xml Datei im Mod Ordner. Dort könnt ihr folgende dinge anpassen:
+Das Script erstellt beim ersten Start eine xml Datei im modSettings Ordner. Dort könnt ihr folgende dinge anpassen:
   * Position <position isDynamic="bool" x="[0,1]" y="[0,1]"/>
     * isDynamic
         true: automatische positionierung unter berücksichtigung der Text Breite und Höhe im oberen rechten Ecken. X und Y werden ignoriert.

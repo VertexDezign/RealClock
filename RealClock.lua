@@ -125,7 +125,7 @@ function RealClock:getColor(source)
   elseif color == "black" then
     return 0, 0, 0, 1
   else
-    local splitted = StringUtil.splitString(",", color)
+    local splitted = color:split(",")
     local colors = {}
     for _, v in pairs(splitted) do
       table.insert(colors, tonumber(v))
@@ -202,7 +202,7 @@ function RealClock:setValuesFromXML(fileName)
   local color = Utils.getNoNil(getXMLString(xml, "RealClock.rendering#color"), RealClock.d.rendering.color)
   -- validate color
   if color:lower() ~= "white" and color:lower() ~= "black" then
-    local c = StringUtil.splitString(",", color)
+    local c = color:split(",")
     if table.getn(c) == 4 then
       local valid = true
       for _, v in pairs(c) do
