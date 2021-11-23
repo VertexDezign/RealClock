@@ -42,7 +42,7 @@ RealClock.d = protect(RealClock.d)
 
 function RealClock:loadMap(name)
   self.debugger = GrisuDebug:create("RealClock")
-  self.debugger:setLogLvl(GrisuDebug.DEBUG)
+  self.debugger:setLogLvl(GrisuDebug.INFO)
 
   self.debugger:info("RealClock loading")
 
