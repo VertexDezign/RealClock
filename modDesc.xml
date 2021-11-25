@@ -21,27 +21,27 @@ false: Use x and y ignoring text dimension
 * Color and size of text <rendering color="black|white|r,g,b,a" fontSize="[0,1]"/>
 * color: supports the following text values: black, white and all rgba colors seperated by comma in the range [0..1] example king blue "0.25,0.41,0.88,1"
 * fontSize: the size of the font to display, a value in the range [0..1], default 0.015. UI Scale is used for calculating the font size to display
-* Format of datetime string
+* Format of datetime string (see list below)
 
 Possible Formats:
-%a	abbreviated weekday name (e.g., Wed)
-%A	full weekday name (e.g., Wednesday)
-%b	abbreviated month name (e.g., Sep)
-%B	full month name (e.g., September)
-%c	date and time (e.g., 09/16/98 23:48:10)
-%d	day of the month (16) [01-31]
-%H	hour, using a 24-hour clock (23) [00-23]
-%I	hour, using a 12-hour clock (11) [01-12]
-%M	minute (48) [00-59]
-%m	month (09) [01-12]
-%p	either "am" or "pm" (pm)
-%S	second (10) [00-61]
-%w	weekday (3) [0-6 = Sunday-Saturday]
-%x	date (e.g., 09/16/98)
-%X	time (e.g., 23:48:10)
-%Y	full year (1998)
-%y	two-digit year (98) [00-99]
-%%	the character `%´
+%a abbreviated weekday name (e.g., Wed)
+%A full weekday name (e.g., Wednesday)
+%b abbreviated month name (e.g., Sep)
+%B full month name (e.g., September)
+%c date and time (e.g., 09/16/98 23:48:10)
+%d day of the month (16) [01-31]
+%H hour, using a 24-hour clock (23) [00-23]
+%I hour, using a 12-hour clock (11) [01-12]
+%M minute (48) [00-59]
+%m month (09) [01-12]
+%p either "am" or "pm" (pm)
+%S second (10) [00-61]
+%w weekday (3) [0-6 = Sunday-Saturday]
+%x date (e.g., 09/16/98)
+%X time (e.g., 23:48:10)
+%Y full year (1998)
+%y two-digit year (98) [00-99]
+%% the character `%´
 ]]>
         </en>
         <de>
@@ -58,27 +58,27 @@ false: Nutze x und y, Text Höhe und Breite werden ignoriert
 * Farbe und Grösse vom Text <rendering color="black|white|r,g,b,a" fontSize="[0,1]"/>
 * color: Unterstüzt die folgenden beiden Text Werte: black, white und rgba Farben getrennt durch ein Komma im Bereich [0..1] Beispiel Königsblau "0.25,0.41,0.88,1"
 * fontSize: Die grösse der Schrift, ein wert im Bereich [0..1], Standart ist 0.015. UI Skalierung wird mit einbezogen bei der Darstellung!
-* Format des Strings
+* Format des Strings (siehe Liste unten)
 
 Mögliche Formate
-%a	Wochentag abgekürzt (z.B., Wed)
-%A	Wochentag ausgeschrieben (z.B., Wednesday)
-%b	Monat abgekürzt (z.B., Sep)
-%B	Monat ausgeschrieben (z.B., September)
-%c	Tag und zeit (z.B., 09/16/98 23:48:10)
-%d	Tag des monats (16) [01-31]
-%H	Stunde, 24h modus (23) [00-23]
-%I	Stunde, 12h modus (11) [01-12]
-%M	Minute (48) [00-59]
-%m	Monat (09) [01-12]
-%p	entweder "am" oder "pm" (pm)
-%S	Sekunde (10) [00-61]
-%w	Wochentag (3) [0-6 = Sunday-Saturday]
-%x	Datum (e.g., 09/16/98)
-%X	Zeit (e.g., 23:48:10)
-%Y	volles Jahr (1998)
-%y	zweistelliges Jahr (98) [00-99]
-%%	Das Zeichen `%´
+%a Wochentag abgekürzt (z.B., Wed)
+%A Wochentag ausgeschrieben (z.B., Wednesday)
+%b Monat abgekürzt (z.B., Sep)
+%B Monat ausgeschrieben (z.B., September)
+%c Tag und zeit (z.B., 09/16/98 23:48:10)
+%d Tag des monats (16) [01-31]
+%H Stunde, 24h modus (23) [00-23]
+%I Stunde, 12h modus (11) [01-12]
+%M Minute (48) [00-59]
+%m Monat (09) [01-12]
+%p entweder "am" oder "pm" (pm)
+%S Sekunde (10) [00-61]
+%w Wochentag (3) [0-6 = Sunday-Saturday]
+%x Datum (e.g., 09/16/98)
+%X Zeit (e.g., 23:48:10)
+%Y volles Jahr (1998)
+%y zweistelliges Jahr (98) [00-99]
+%% Das Zeichen `%´
 ]]>
         </de>
     </description>
