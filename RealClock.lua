@@ -9,6 +9,7 @@
 --                v2.1    - 2019-01-14 - Move settings file to modSettings folder, do not draw when showTime is false
 --                v2.1.1  - 2019-04-01 - Create modSettings folder
 --                v3.0    - 2021-11-19 - FS22
+--                v4.0    - 2024-11-07 - FS25
 -- @descripion:   Shows the real time clock in the upper right corner
 -- @web:          http://grisu118.ch or http://vertexdezign.net
 -- Copyright (C) Grisu118, All Rights Reserved.
@@ -97,7 +98,7 @@ function RealClock:update(dt)
 end
 
 function RealClock:draw()
-  if g_dedicatedServerInfo ~= nil or not g_currentMission.hud.showTime then
+  if g_dedicatedServerInfo ~= nil or not g_currentMission.hud.isVisible then
     return
   end
 
