@@ -57,31 +57,14 @@ function RealClock:loadMap(name)
   self.timeFormat = RealClock.d.timeFormat
 
   if g_dedicatedServerInfo == nil then
-    local xmlFile = g_modsDirectory .. "/" .. RealClock.configFileName
-    if not fileExists(xmlFile) then
-      local modSettingsDir = getUserProfileAppPath() .. "modSettings"
-      local newXmlFile = modSettingsDir .. "/" .. RealClock.configFileName
-      if not fileExists(newXmlFile) then
-        createFolder(modSettingsDir)
-
-        -- Special handling for wrongly named file
-        local wrongNamedFile = modSettingsDir .. RealClock.configFileName
-        if (fileExists(wrongNamedFile)) then
-          self:setValuesFromXML(wrongNamedFile)
-          self:writeCurrentConfig(newXmlFile)
-          self.debugger:warn("Config file created at correct place, you can safely delete the old file: " .. wrongNamedFile)
-        else
-          self:writeDefaultConfig(newXmlFile)
-        end
-      end
-      self:setValuesFromXML(newXmlFile)
-    else
-      self.debugger:warn(
-        "Loading configuration from mod folder, this is deprecated and will be removed in a furhter version. Move your " ..
-          RealClock.configFileName .. " in the modSettings folder."
-      )
-      self:setValuesFromXML(xmlFile)
+    local modSettingsDir = getUserProfileAppPath() .. "modSettings"
+    local newXmlFile = modSettingsDir .. "/" .. RealClock.configFileName
+    self.settingsFile = newXmlFile
+    if not fileExists(newXmlFile) then
+      createFolder(modSettingsDir)
+      self:writeDefaultConfig(newXmlFile)
     end
+    self:setValuesFromXML(newXmlFile)
   end
 end
 
