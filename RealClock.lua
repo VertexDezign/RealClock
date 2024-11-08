@@ -10,6 +10,7 @@
 --                v2.1.1  - 2019-04-01 - Create modSettings folder
 --                v3.0    - 2021-11-19 - FS22
 --                v4.0    - 2024-11-07 - FS25
+--                v4.1    - 2024-11-08 - Add console interface for positioning
 -- @descripion:   Shows the real time clock in the upper right corner
 -- @web:          http://grisu118.ch or http://vertexdezign.net
 -- Copyright (C) Grisu118, All Rights Reserved.
@@ -28,13 +29,13 @@ RealClock.d.rendering.fontSize = 0.015
 
 local function protect(tbl)
   return setmetatable(
-    {},
-    {
-      __index = tbl,
-      __newindex = function(t, key, value)
-        error("attempting to change constant " .. tostring(key) .. " to " .. tostring(value), 2)
-      end
-    }
+      {},
+      {
+        __index = tbl,
+        __newindex = function(t, key, value)
+          error("attempting to change constant " .. tostring(key) .. " to " .. tostring(value), 2)
+        end
+      }
   )
 end
 
@@ -120,9 +121,9 @@ end
 
 function RealClock:writeDefaultConfig(fileName)
   self.debugger:info(
-    function()
-      return "Write default Config to " .. fileName
-    end
+      function()
+        return "Write default Config to " .. fileName
+      end
   )
   local xml = createXMLFile("RealClock", fileName, "RealClock")
   setXMLBool(xml, "RealClock.position#isDynamic", RealClock.d.position.dynamic)
@@ -137,9 +138,9 @@ end
 
 function RealClock:writeCurrentConfig(fileName)
   self.debugger:info(
-    function()
-      return "Write current Config to " .. fileName
-    end
+      function()
+        return "Write current Config to " .. fileName
+      end
   )
   local xml = createXMLFile("RealClock", fileName, "RealClock")
   setXMLBool(xml, "RealClock.position#isDynamic", self.position.dynamic)
@@ -154,31 +155,31 @@ end
 
 function RealClock:setValuesFromXML(fileName)
   self.debugger:info(
-    function()
-      return "Read from xml " .. fileName
-    end
+      function()
+        return "Read from xml " .. fileName
+      end
   )
   local xml = loadXMLFile("RealClock", fileName)
   self.position.dynamic = Utils.getNoNil(getXMLBool(xml, "RealClock.position#isDynamic"), RealClock.d.position.dynamic)
   self.debugger:debug(
-    function()
-      return "Position.dynamic: " .. tostring(self.position.dynamic)
-    end
+      function()
+        return "Position.dynamic: " .. tostring(self.position.dynamic)
+      end
   )
   local x = Utils.getNoNil(getXMLFloat(xml, "RealClock.position#x"), RealClock.d.position.x)
   self.debugger:debug(
-    function()
-      return "Position.x: " .. tostring(x)
-    end
+      function()
+        return "Position.x: " .. tostring(x)
+      end
   )
   if (self:validateFloat(x, "x")) then
     self.position.x = x
   end
   local y = Utils.getNoNil(getXMLFloat(xml, "RealClock.position#y"), RealClock.d.position.y)
   self.debugger:debug(
-    function()
-      return "Position.y: " .. tostring(y)
-    end
+      function()
+        return "Position.y: " .. tostring(y)
+      end
   )
   if (self:validateFloat(y, "y")) then
     self.position.y = y
@@ -202,10 +203,10 @@ function RealClock:setValuesFromXML(fileName)
       end
     else
       self.debugger:warn(
-        function()
-          return "Invalid value for color, only 'white', 'black' or a custom color like '0,0.5,1,0.8' allowed, found " ..
-            color
-        end
+          function()
+            return "Invalid value for color, only 'white', 'black' or a custom color like '0,0.5,1,0.8' allowed, found " ..
+                color
+          end
       )
       self.rendering.color = RealClock.d.rendering.color
     end
@@ -227,12 +228,44 @@ function RealClock:validateFloat(float, text)
     return true
   else
     self.debugger:warn(
-      function()
-        return "Invalid value for " .. text .. ", must be a value between 0 and 1 including both, was " .. float
-      end
+        function()
+          return "Invalid value for " .. text .. ", must be a value between 0 and 1 including both, was " .. float
+        end
     )
     return false
   end
 end
 
+-- console interface for easier positioning of the clock
+function RealClock:printCurrentValues()
+  print("X: " .. self.position.x .. " Y: " .. self.position.y .. " FontSize: " .. self.rendering.fontSize)
+end
+
+function RealClock:updatePosition(x, y)
+  if self:validateFloat(x, "X") and self:validateFloat(y, "X") then
+    self.position.dynamic = false
+    self.position.x = tonumber(x)
+    self.position.y = tonumber(y)
+  end
+end
+
+function RealClock:updateFontSize(fontSize)
+  if self:validateFloat(fontSize, "FontSize") then
+    self.rendering.fontSize = tonumber(fontSize)
+  end
+end
+
+function RealClock:saveSettings()
+  if self.settingsFile ~= nil then
+    self:writeCurrentConfig(self.settingsFile)
+  else
+    self.debugger:warn("settings file is not set")
+  end
+end
+
 addModEventListener(RealClock)
+
+addConsoleCommand("vdRealClockPrintCurrentValues", "Prints the current position and fontSize into console", "printCurrentValues", RealClock)
+addConsoleCommand("vdRealClockSetPosition", "Set the position of the clock, requires two arguments x and y with a value from 0 < 1", "updatePosition", RealClock)
+addConsoleCommand("vdRealClockSetFontSize", "Set the font size of the clock, requires one argument", "updateFontSize", RealClock)
+addConsoleCommand("vdRealClockSaveSettings", "Saves the current values into the settings file", "saveSettings", RealClock)
