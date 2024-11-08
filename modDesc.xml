@@ -8,7 +8,7 @@
     </title>
     <description>
         <en>
-<![CDATA[Shows the current real time in the upper right corner.
+            <![CDATA[Shows the current real time in the upper right corner.
 
 This script creates a configuration xml at first startup in your modSettings folder. There you can adjust the following:
 * Position <position isDynamic="bool" x="[0,1]" y="[0,1]"/>
@@ -22,6 +22,12 @@ false: Use x and y ignoring text dimension
 * color: supports the following text values: black, white and all rgba colors seperated by comma in the range [0..1] example king blue "0.25,0.41,0.88,1"
 * fontSize: the size of the font to display, a value in the range [0..1], default 0.015. UI Scale is used for calculating the font size to display
 * Format of datetime string (see list below)
+
+Position and font size can now also be set with console commands, this makes it a lot easier to position the clock at the wanted position
+* vdRealClockPrintCurrentValues -> Shows the current values which are used
+* vdRealClockSetPosition 0.9 0.9 -> Set the position, applies immediately
+* vdRealClockSetFontSize 0.013 -> Set the font size, applies immediately
+* vdRealClockSaveSettings -> Saves the changed values in the xml within the modSettings folder
 
 Possible Formats:
 %a abbreviated weekday name (e.g., Wed)
@@ -45,7 +51,7 @@ Possible Formats:
 ]]>
         </en>
         <de>
-<![CDATA[Zeigt die aktuelle echte Uhrzeit oben rechts im Spiel an.
+            <![CDATA[Zeigt die aktuelle echte Uhrzeit oben rechts im Spiel an.
 
 Das Script erstellt beim ersten Start eine xml Datei im modSettings Ordner. Dort könnt ihr folgende dinge anpassen:
 * Position <position isDynamic="bool" x="[0,1]" y="[0,1]"/>
@@ -59,6 +65,12 @@ false: Nutze x und y, Text Höhe und Breite werden ignoriert
 * color: Unterstüzt die folgenden beiden Text Werte: black, white und rgba Farben getrennt durch ein Komma im Bereich [0..1] Beispiel Königsblau "0.25,0.41,0.88,1"
 * fontSize: Die grösse der Schrift, ein wert im Bereich [0..1], Standart ist 0.015. UI Skalierung wird mit einbezogen bei der Darstellung!
 * Format des Strings (siehe Liste unten)
+
+Position wie auch Schriftgrösse können auch über Konsolen Kommandos gesetzt werden, dies vereinfacht das Positionieren an gewünschter Stelle erheblich
+* vdRealClockPrintCurrentValues -> Zeigt die aktuellen Werte
+* vdRealClockSetPosition 0.9 0.9 -> Setzt die Position auf die gewünschten Werte, sofort sichtbar
+* vdRealClockSetFontSize 0.013 -> Setzt die Schriftgrösse auf den angegebenen Wert, sofort sichbar
+* vdRealClockSaveSettings -> Speichert die geänderten Daten in der xml im modSettings Ordner
 
 Mögliche Formate
 %a Wochentag abgekürzt (z.B., Wed)
@@ -83,9 +95,9 @@ Mögliche Formate
         </de>
     </description>
     <iconFilename>store_clock.png</iconFilename>
-    <multiplayer supported="true" />
+    <multiplayer supported="true"/>
     <extraSourceFiles>
-		<sourceFile filename="GrisuDebug.lua" />
-		<sourceFile filename="RealClock.lua" />
-	</extraSourceFiles>
+        <sourceFile filename="GrisuDebug.lua"/>
+        <sourceFile filename="RealClock.lua"/>
+    </extraSourceFiles>
 </modDesc>
