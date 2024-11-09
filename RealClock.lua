@@ -11,6 +11,7 @@
 --                v3.0    - 2021-11-19 - FS22
 --                v4.0    - 2024-11-07 - FS25
 --                v4.1    - 2024-11-08 - Add console interface for positioning
+--                v4.2    - 2024-11-09 - Move dynamic position into game info display below game clock
 -- @descripion:   Shows the real time clock in the upper right corner
 -- @web:          http://grisu118.ch or http://vertexdezign.net
 -- Copyright (C) Grisu118, All Rights Reserved.
@@ -82,7 +83,7 @@ function RealClock:update(dt)
 end
 
 function RealClock:draw()
-  if g_dedicatedServerInfo ~= nil or not g_currentMission.hud.isVisible then
+  if g_dedicatedServerInfo ~= nil or not g_currentMission.hud.gameInfoDisplay.isVisible then
     return
   end
 
@@ -94,10 +95,18 @@ function RealClock:draw()
   local posX = self.position.x
   local posY = self.position.y
   if self.position.dynamic then
-    local width = getTextWidth(fontSize, date)
-    local height = getTextHeight(fontSize, date)
-    posX = 0.99 - width
-    posY = 1 - height
+    local gameClockFontSize = g_currentMission.hud.gameInfoDisplay.clockTextSize
+    -- make hour clock a little bit smaller than the original
+    fontSize = gameClockFontSize * 0.75
+    -- we are a little bit to far right, so we move it two characters to the left
+    local width = getTextWidth(gameClockFontSize, "09")
+    local gameClockHeight = getTextHeight(gameClockFontSize, "12:53")
+    local height = getTextHeight(gameClockFontSize, date)
+    posX = g_currentMission.hud.gameInfoDisplay.helpOffsetXClock - width
+    -- top of clock text
+    posY = g_currentMission.hud.gameInfoDisplay.y - g_currentMission.hud.gameInfoDisplay.clockTextOffsetY
+    -- move it below the game clock
+    posY = posY - gameClockHeight - 2 * (height / 3)
   end
   renderText(posX, posY, fontSize, date)
   setTextColor(1, 1, 1, 1)

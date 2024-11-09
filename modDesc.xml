@@ -13,7 +13,7 @@
 This script creates a configuration xml at first startup in your modSettings folder. There you can adjust the following:
 * Position <position isDynamic="bool" x="[0,1]" y="[0,1]"/>
 * isDynamic
-true: automatically position the text in the upper right corner considering his dimensions, ignore x and y
+true: automatically position the text below the game clock, ignore x and y
 false: Use x and y ignoring text dimension
 * x, y: the position on the screen, see small illustration below for details
 1,0 .. 1,1
@@ -56,7 +56,7 @@ Possible Formats:
 Das Script erstellt beim ersten Start eine xml Datei im modSettings Ordner. Dort könnt ihr folgende dinge anpassen:
 * Position <position isDynamic="bool" x="[0,1]" y="[0,1]"/>
 * isDynamic
-true: automatische positionierung unter berücksichtigung der Text Breite und Höhe im oberen rechten Ecken. X und Y werden ignoriert.
+true: automatische positionierung direkt unter der ingame Uhrzeit. X und Y werden ignoriert.
 false: Nutze x und y, Text Höhe und Breite werden ignoriert
 * x, y: Die Position auf dem Bildschirm, welche Ecken welche werte haben könnt ihr der Illustration unten entnehmen.
 1,0 .. 1,1
