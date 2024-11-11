@@ -83,7 +83,7 @@ function RealClock:update(dt)
 end
 
 function RealClock:draw()
-  if g_dedicatedServerInfo ~= nil or not g_currentMission.hud.gameInfoDisplay.isVisible then
+  if g_dedicatedServerInfo ~= nil or not g_currentMission.hud.gameInfoDisplay.isVisible or not g_currentMission.hud.isVisible then
     return
   end
 
