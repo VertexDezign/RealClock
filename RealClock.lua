@@ -251,6 +251,10 @@ function RealClock:printCurrentValues()
 end
 
 function RealClock:updatePosition(x, y)
+  if x == nil or y == nil then
+    self.debugger:warn("Two parameters are required <x> <y>, at least one was missing")
+    return
+  end
   if self:validateFloat(x, "X") and self:validateFloat(y, "X") then
     self.position.dynamic = false
     self.position.x = tonumber(x)
@@ -259,7 +263,12 @@ function RealClock:updatePosition(x, y)
 end
 
 function RealClock:updateFontSize(fontSize)
+  if fontSize == nil then
+    self.debugger:warn("One parameter required <fontSize>")
+    return
+  end
   if self:validateFloat(fontSize, "FontSize") then
+    self.position.dynamic = false
     self.rendering.fontSize = tonumber(fontSize)
   end
 end
@@ -272,9 +281,17 @@ function RealClock:saveSettings()
   end
 end
 
+function RealClock:resetToDefault()
+  self.position.dynamic = RealClock.d.position.dynamic
+  self.position.x = RealClock.d.position.x
+  self.position.y = RealClock.d.position.y
+  self.rendering.fontSize = RealClock.d.rendering.fontSize
+end
+
 addModEventListener(RealClock)
 
 addConsoleCommand("vdRealClockPrintCurrentValues", "Prints the current position and fontSize into console", "printCurrentValues", RealClock)
 addConsoleCommand("vdRealClockSetPosition", "Set the position of the clock, requires two arguments x and y with a value from 0 < 1", "updatePosition", RealClock)
 addConsoleCommand("vdRealClockSetFontSize", "Set the font size of the clock, requires one argument", "updateFontSize", RealClock)
 addConsoleCommand("vdRealClockSaveSettings", "Saves the current values into the settings file", "saveSettings", RealClock)
+addConsoleCommand("vdRealClockResetToDefault", "Set the changed values back to their defaults", "resetToDefault", RealClock)
