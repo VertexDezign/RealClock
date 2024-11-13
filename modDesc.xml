@@ -27,6 +27,7 @@ Position and font size can now also be set with console commands, this makes it 
 * vdRealClockPrintCurrentValues -> Shows the current values which are used
 * vdRealClockSetPosition 0.9 0.9 -> Set the position, applies immediately
 * vdRealClockSetFontSize 0.013 -> Set the font size, applies immediately
+* vdRealClockResetToDefault -> Set the values back to their defaults
 * vdRealClockSaveSettings -> Saves the changed values in the xml within the modSettings folder
 
 Possible Formats:
@@ -48,6 +49,8 @@ Possible Formats:
 %Y full year (1998)
 %y two-digit year (98) [00-99]
 %% the character `%´
+
+GitHub link: https://github.com/VertexDezign/RealClock
 ]]>
         </en>
         <de>
@@ -56,20 +59,21 @@ Possible Formats:
 Das Script erstellt beim ersten Start eine xml Datei im modSettings Ordner. Dort könnt ihr folgende dinge anpassen:
 * Position <position isDynamic="bool" x="[0,1]" y="[0,1]"/>
 * isDynamic
-true: automatische positionierung direkt unter der ingame Uhrzeit. X und Y werden ignoriert.
+true: automatische positionierung direkt unter der Ingame Uhrzeit. X und Y werden ignoriert.
 false: Nutze x und y, Text Höhe und Breite werden ignoriert
 * x, y: Die Position auf dem Bildschirm, welche Ecken welche werte haben könnt ihr der Illustration unten entnehmen.
 1,0 .. 1,1
 0,0 .. 1,0
 * Farbe und Grösse vom Text <rendering color="black|white|r,g,b,a" fontSize="[0,1]"/>
-* color: Unterstüzt die folgenden beiden Text Werte: black, white und rgba Farben getrennt durch ein Komma im Bereich [0..1] Beispiel Königsblau "0.25,0.41,0.88,1"
-* fontSize: Die grösse der Schrift, ein wert im Bereich [0..1], Standart ist 0.015. UI Skalierung wird mit einbezogen bei der Darstellung!
+* color: Unterstützt die folgenden beiden Text Werte: black, white und rgba Farben getrennt durch ein Komma im Bereich [0..1] Beispiel Königsblau "0.25,0.41,0.88,1"
+* fontSize: Die grösse der Schrift, ein wert im Bereich [0..1], Standard ist 0.015. UI Skalierung wird mit einbezogen bei der Darstellung!
 * Format des Strings (siehe Liste unten)
 
 Position wie auch Schriftgrösse können auch über Konsolen Kommandos gesetzt werden, dies vereinfacht das Positionieren an gewünschter Stelle erheblich
 * vdRealClockPrintCurrentValues -> Zeigt die aktuellen Werte
 * vdRealClockSetPosition 0.9 0.9 -> Setzt die Position auf die gewünschten Werte, sofort sichtbar
-* vdRealClockSetFontSize 0.013 -> Setzt die Schriftgrösse auf den angegebenen Wert, sofort sichbar
+* vdRealClockSetFontSize 0.013 -> Setzt die Schriftgrösse auf den angegebenen Wert, sofort sichtbar
+* vdRealClockResetToDefault -> Setzt die Werte wieder auf Ihren Standartwert zurück
 * vdRealClockSaveSettings -> Speichert die geänderten Daten in der xml im modSettings Ordner
 
 Mögliche Formate
@@ -77,7 +81,7 @@ Mögliche Formate
 %A Wochentag ausgeschrieben (z.B., Wednesday)
 %b Monat abgekürzt (z.B., Sep)
 %B Monat ausgeschrieben (z.B., September)
-%c Tag und zeit (z.B., 09/16/98 23:48:10)
+%c Tag und Zeit (z.B., 09/16/98 23:48:10)
 %d Tag des monats (16) [01-31]
 %H Stunde, 24h modus (23) [00-23]
 %I Stunde, 12h modus (11) [01-12]
@@ -90,7 +94,9 @@ Mögliche Formate
 %X Zeit (e.g., 23:48:10)
 %Y volles Jahr (1998)
 %y zweistelliges Jahr (98) [00-99]
-%% Das Zeichen `%´
+%% das Zeichen `%´
+
+GitHub-Link: https://github.com/VertexDezign/RealClock
 ]]>
         </de>
     </description>
