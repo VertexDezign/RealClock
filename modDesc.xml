@@ -8,7 +8,7 @@
     </title>
     <description>
         <en>
-            <![CDATA[Shows the current real time in the upper right corner.
+            <![CDATA[Shows the current real time in game, default location is below the ingame clock.
 
 This script creates a configuration xml at first startup in your modSettings folder. There you can adjust the following:
 * Position <position isDynamic="bool" x="[0,1]" y="[0,1]"/>
@@ -54,7 +54,7 @@ GitHub link: https://github.com/VertexDezign/RealClock
 ]]>
         </en>
         <de>
-            <![CDATA[Zeigt die aktuelle echte Uhrzeit oben rechts im Spiel an.
+            <![CDATA[Zeigt die aktuelle echte Uhrzeit im Spiel an, ohne Anpassung wird diese unterhalb der Ingame Uhr angezeigt.
 
 Das Script erstellt beim ersten Start eine xml Datei im modSettings Ordner. Dort könnt ihr folgende dinge anpassen:
 * Position <position isDynamic="bool" x="[0,1]" y="[0,1]"/>
