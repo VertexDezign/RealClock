@@ -56,17 +56,17 @@ GitHub link: https://github.com/VertexDezign/RealClock
         <de>
             <![CDATA[Zeigt die aktuelle echte Uhrzeit im Spiel an, ohne Anpassung wird diese unterhalb der Ingame Uhr angezeigt.
 
-Das Script erstellt beim ersten Start eine xml Datei im modSettings Ordner. Dort könnt ihr folgende dinge anpassen:
+Das Script erstellt beim ersten Start eine xml Datei im modSettings Ordner. Dort könnt ihr folgende Dinge anpassen:
 * Position <position isDynamic="bool" x="[0,1]" y="[0,1]"/>
 * isDynamic
-true: automatische positionierung direkt unter der Ingame Uhrzeit. X und Y werden ignoriert.
+true: automatische Positionierung direkt unter der Ingame Uhrzeit. X und Y werden ignoriert.
 false: Nutze x und y, Text Höhe und Breite werden ignoriert
-* x, y: Die Position auf dem Bildschirm, welche Ecken welche werte haben könnt ihr der Illustration unten entnehmen.
+* x, y: Die Position auf dem Bildschirm, welche Ecken welche Werte haben, könnt ihr der Illustration unten entnehmen.
 1,0 .. 1,1
 0,0 .. 1,0
 * Farbe und Grösse vom Text <rendering color="black|white|r,g,b,a" fontSize="[0,1]"/>
 * color: Unterstützt die folgenden beiden Text Werte: black, white und rgba Farben getrennt durch ein Komma im Bereich [0..1] Beispiel Königsblau "0.25,0.41,0.88,1"
-* fontSize: Die grösse der Schrift, ein wert im Bereich [0..1], Standard ist 0.015. UI Skalierung wird mit einbezogen bei der Darstellung!
+* fontSize: Die Grösse der Schrift, ein Wert im Bereich [0..1], Standard ist 0.015. UI Skalierung wird mit einbezogen bei der Darstellung!
 * Format des Strings (siehe Liste unten)
 
 Position wie auch Schriftgrösse können auch über Konsolen Kommandos gesetzt werden, dies vereinfacht das Positionieren an gewünschter Stelle erheblich
@@ -82,7 +82,7 @@ Mögliche Formate
 %b Monat abgekürzt (z.B., Sep)
 %B Monat ausgeschrieben (z.B., September)
 %c Tag und Zeit (z.B., 09/16/98 23:48:10)
-%d Tag des monats (16) [01-31]
+%d Tag des Monats (16) [01-31]
 %H Stunde, 24h modus (23) [00-23]
 %I Stunde, 12h modus (11) [01-12]
 %M Minute (48) [00-59]
@@ -100,7 +100,7 @@ GitHub-Link: https://github.com/VertexDezign/RealClock
 ]]>
         </de>
     </description>
-    <iconFilename>store_clock.png</iconFilename>
+    <iconFilename>icon_clock.png</iconFilename>
     <multiplayer supported="true"/>
     <extraSourceFiles>
         <sourceFile filename="GrisuDebug.lua"/>
