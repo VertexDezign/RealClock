@@ -9,6 +9,9 @@
 --                v2.1    - 2019-01-14 - Move settings file to modSettings folder, do not draw when showTime is false
 --                v2.1.1  - 2019-04-01 - Create modSettings folder
 --                v3.0    - 2021-11-19 - FS22
+--                v4.0    - 2024-11-07 - FS25
+--                v4.1    - 2024-11-08 - Add console interface for positioning
+--                v4.2    - 2024-11-09 - Move dynamic position into game info display below game clock
 -- @descripion:   Shows the real time clock in the upper right corner
 -- @web:          http://grisu118.ch or http://vertexdezign.net
 -- Copyright (C) Grisu118, All Rights Reserved.
@@ -27,13 +30,13 @@ RealClock.d.rendering.fontSize = 0.015
 
 local function protect(tbl)
   return setmetatable(
-    {},
-    {
-      __index = tbl,
-      __newindex = function(t, key, value)
-        error("attempting to change constant " .. tostring(key) .. " to " .. tostring(value), 2)
-      end
-    }
+      {},
+      {
+        __index = tbl,
+        __newindex = function(t, key, value)
+          error("attempting to change constant " .. tostring(key) .. " to " .. tostring(value), 2)
+        end
+      }
   )
 end
 
@@ -56,31 +59,14 @@ function RealClock:loadMap(name)
   self.timeFormat = RealClock.d.timeFormat
 
   if g_dedicatedServerInfo == nil then
-    local xmlFile = g_modsDirectory .. "/" .. RealClock.configFileName
-    if not fileExists(xmlFile) then
-      local modSettingsDir = getUserProfileAppPath() .. "modSettings"
-      local newXmlFile = modSettingsDir .. "/" .. RealClock.configFileName
-      if not fileExists(newXmlFile) then
-        createFolder(modSettingsDir)
-
-        -- Special handling for wrongly named file
-        local wrongNamedFile = modSettingsDir .. RealClock.configFileName
-        if (fileExists(wrongNamedFile)) then
-          self:setValuesFromXML(wrongNamedFile)
-          self:writeCurrentConfig(newXmlFile)
-          self.debugger:warn("Config file created at correct place, you can safely delete the old file: " .. wrongNamedFile)
-        else
-          self:writeDefaultConfig(newXmlFile)
-        end
-      end
-      self:setValuesFromXML(newXmlFile)
-    else
-      self.debugger:warn(
-        "Loading configuration from mod folder, this is deprecated and will be removed in a furhter version. Move your " ..
-          RealClock.configFileName .. " in the modSettings folder."
-      )
-      self:setValuesFromXML(xmlFile)
+    local modSettingsDir = getUserProfileAppPath() .. "modSettings"
+    local newXmlFile = modSettingsDir .. "/" .. RealClock.configFileName
+    self.settingsFile = newXmlFile
+    if not fileExists(newXmlFile) then
+      createFolder(modSettingsDir)
+      self:writeDefaultConfig(newXmlFile)
     end
+    self:setValuesFromXML(newXmlFile)
   end
 end
 
@@ -97,7 +83,7 @@ function RealClock:update(dt)
 end
 
 function RealClock:draw()
-  if g_dedicatedServerInfo ~= nil or not g_currentMission.hud.showTime then
+  if g_dedicatedServerInfo ~= nil or not g_currentMission.hud.gameInfoDisplay.isVisible or not g_currentMission.hud.isVisible then
     return
   end
 
@@ -109,10 +95,18 @@ function RealClock:draw()
   local posX = self.position.x
   local posY = self.position.y
   if self.position.dynamic then
-    local width = getTextWidth(fontSize, date)
-    local height = getTextHeight(fontSize, date)
-    posX = 0.99 - width
-    posY = 1 - height
+    local gameClockFontSize = g_currentMission.hud.gameInfoDisplay.clockTextSize
+    -- make hour clock a little bit smaller than the original
+    fontSize = gameClockFontSize * 0.75
+    -- we are a little bit to far right, so we move it two characters to the left
+    local width = getTextWidth(gameClockFontSize, "09")
+    local gameClockHeight = getTextHeight(gameClockFontSize, "12:53")
+    local height = getTextHeight(gameClockFontSize, date)
+    posX = g_currentMission.hud.gameInfoDisplay.helpOffsetXClock - width
+    -- top of clock text
+    posY = g_currentMission.hud.gameInfoDisplay.y - g_currentMission.hud.gameInfoDisplay.clockTextOffsetY
+    -- move it below the game clock
+    posY = posY - gameClockHeight - 2 * (height / 3)
   end
   renderText(posX, posY, fontSize, date)
   setTextColor(1, 1, 1, 1)
@@ -136,9 +130,9 @@ end
 
 function RealClock:writeDefaultConfig(fileName)
   self.debugger:info(
-    function()
-      return "Write default Config to " .. fileName
-    end
+      function()
+        return "Write default Config to " .. fileName
+      end
   )
   local xml = createXMLFile("RealClock", fileName, "RealClock")
   setXMLBool(xml, "RealClock.position#isDynamic", RealClock.d.position.dynamic)
@@ -153,9 +147,9 @@ end
 
 function RealClock:writeCurrentConfig(fileName)
   self.debugger:info(
-    function()
-      return "Write current Config to " .. fileName
-    end
+      function()
+        return "Write current Config to " .. fileName
+      end
   )
   local xml = createXMLFile("RealClock", fileName, "RealClock")
   setXMLBool(xml, "RealClock.position#isDynamic", self.position.dynamic)
@@ -170,31 +164,31 @@ end
 
 function RealClock:setValuesFromXML(fileName)
   self.debugger:info(
-    function()
-      return "Read from xml " .. fileName
-    end
+      function()
+        return "Read from xml " .. fileName
+      end
   )
   local xml = loadXMLFile("RealClock", fileName)
   self.position.dynamic = Utils.getNoNil(getXMLBool(xml, "RealClock.position#isDynamic"), RealClock.d.position.dynamic)
   self.debugger:debug(
-    function()
-      return "Position.dynamic: " .. tostring(self.position.dynamic)
-    end
+      function()
+        return "Position.dynamic: " .. tostring(self.position.dynamic)
+      end
   )
   local x = Utils.getNoNil(getXMLFloat(xml, "RealClock.position#x"), RealClock.d.position.x)
   self.debugger:debug(
-    function()
-      return "Position.x: " .. tostring(x)
-    end
+      function()
+        return "Position.x: " .. tostring(x)
+      end
   )
   if (self:validateFloat(x, "x")) then
     self.position.x = x
   end
   local y = Utils.getNoNil(getXMLFloat(xml, "RealClock.position#y"), RealClock.d.position.y)
   self.debugger:debug(
-    function()
-      return "Position.y: " .. tostring(y)
-    end
+      function()
+        return "Position.y: " .. tostring(y)
+      end
   )
   if (self:validateFloat(y, "y")) then
     self.position.y = y
@@ -218,10 +212,10 @@ function RealClock:setValuesFromXML(fileName)
       end
     else
       self.debugger:warn(
-        function()
-          return "Invalid value for color, only 'white', 'black' or a custom color like '0,0.5,1,0.8' allowed, found " ..
-            color
-        end
+          function()
+            return "Invalid value for color, only 'white', 'black' or a custom color like '0,0.5,1,0.8' allowed, found " ..
+                color
+          end
       )
       self.rendering.color = RealClock.d.rendering.color
     end
@@ -243,12 +237,61 @@ function RealClock:validateFloat(float, text)
     return true
   else
     self.debugger:warn(
-      function()
-        return "Invalid value for " .. text .. ", must be a value between 0 and 1 including both, was " .. float
-      end
+        function()
+          return "Invalid value for " .. text .. ", must be a value between 0 and 1 including both, was " .. float
+        end
     )
     return false
   end
 end
 
+-- console interface for easier positioning of the clock
+function RealClock:printCurrentValues()
+  print("X: " .. self.position.x .. " Y: " .. self.position.y .. " FontSize: " .. self.rendering.fontSize)
+end
+
+function RealClock:updatePosition(x, y)
+  if x == nil or y == nil then
+    self.debugger:warn("Two parameters are required <x> <y>, at least one was missing")
+    return
+  end
+  if self:validateFloat(x, "X") and self:validateFloat(y, "X") then
+    self.position.dynamic = false
+    self.position.x = tonumber(x)
+    self.position.y = tonumber(y)
+  end
+end
+
+function RealClock:updateFontSize(fontSize)
+  if fontSize == nil then
+    self.debugger:warn("One parameter required <fontSize>")
+    return
+  end
+  if self:validateFloat(fontSize, "FontSize") then
+    self.position.dynamic = false
+    self.rendering.fontSize = tonumber(fontSize)
+  end
+end
+
+function RealClock:saveSettings()
+  if self.settingsFile ~= nil then
+    self:writeCurrentConfig(self.settingsFile)
+  else
+    self.debugger:warn("settings file is not set")
+  end
+end
+
+function RealClock:resetToDefault()
+  self.position.dynamic = RealClock.d.position.dynamic
+  self.position.x = RealClock.d.position.x
+  self.position.y = RealClock.d.position.y
+  self.rendering.fontSize = RealClock.d.rendering.fontSize
+end
+
 addModEventListener(RealClock)
+
+addConsoleCommand("vdRealClockPrintCurrentValues", "Prints the current position and fontSize into console", "printCurrentValues", RealClock)
+addConsoleCommand("vdRealClockSetPosition", "Set the position of the clock, requires two arguments x and y with a value from 0 < 1", "updatePosition", RealClock)
+addConsoleCommand("vdRealClockSetFontSize", "Set the font size of the clock, requires one argument", "updateFontSize", RealClock)
+addConsoleCommand("vdRealClockSaveSettings", "Saves the current values into the settings file", "saveSettings", RealClock)
+addConsoleCommand("vdRealClockResetToDefault", "Set the changed values back to their defaults", "resetToDefault", RealClock)

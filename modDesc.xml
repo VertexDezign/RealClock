@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
-<modDesc descVersion="61">
+<modDesc descVersion="92">
     <author>VertexDezign and Slivicon</author>
     <version>1.0.0.0</version>
     <title>
@@ -8,12 +8,12 @@
     </title>
     <description>
         <en>
-<![CDATA[Shows the current real time in the upper right corner.
+            <![CDATA[Shows the current real time in game, default location is below the ingame clock.
 
 This script creates a configuration xml at first startup in your modSettings folder. There you can adjust the following:
 * Position <position isDynamic="bool" x="[0,1]" y="[0,1]"/>
 * isDynamic
-true: automatically position the text in the upper right corner considering his dimensions, ignore x and y
+true: automatically position the text below the game clock, ignore x and y
 false: Use x and y ignoring text dimension
 * x, y: the position on the screen, see small illustration below for details
 1,0 .. 1,1
@@ -22,6 +22,13 @@ false: Use x and y ignoring text dimension
 * color: supports the following text values: black, white and all rgba colors seperated by comma in the range [0..1] example king blue "0.25,0.41,0.88,1"
 * fontSize: the size of the font to display, a value in the range [0..1], default 0.015. UI Scale is used for calculating the font size to display
 * Format of datetime string (see list below)
+
+Position and font size can now also be set with console commands, this makes it a lot easier to position the clock at the wanted position
+* vdRealClockPrintCurrentValues -> Shows the current values which are used
+* vdRealClockSetPosition 0.9 0.9 -> Set the position, applies immediately
+* vdRealClockSetFontSize 0.013 -> Set the font size, applies immediately
+* vdRealClockResetToDefault -> Set the values back to their defaults
+* vdRealClockSaveSettings -> Saves the changed values in the xml within the modSettings folder
 
 Possible Formats:
 %a abbreviated weekday name (e.g., Wed)
@@ -42,31 +49,40 @@ Possible Formats:
 %Y full year (1998)
 %y two-digit year (98) [00-99]
 %% the character `%´
+
+GitHub link: https://github.com/VertexDezign/RealClock
 ]]>
         </en>
         <de>
-<![CDATA[Zeigt die aktuelle echte Uhrzeit oben rechts im Spiel an.
+            <![CDATA[Zeigt die aktuelle echte Uhrzeit im Spiel an, ohne Anpassung wird diese unterhalb der Ingame Uhr angezeigt.
 
-Das Script erstellt beim ersten Start eine xml Datei im modSettings Ordner. Dort könnt ihr folgende dinge anpassen:
+Das Script erstellt beim ersten Start eine xml Datei im modSettings Ordner. Dort könnt ihr folgende Dinge anpassen:
 * Position <position isDynamic="bool" x="[0,1]" y="[0,1]"/>
 * isDynamic
-true: automatische positionierung unter berücksichtigung der Text Breite und Höhe im oberen rechten Ecken. X und Y werden ignoriert.
+true: automatische Positionierung direkt unter der Ingame Uhrzeit. X und Y werden ignoriert.
 false: Nutze x und y, Text Höhe und Breite werden ignoriert
-* x, y: Die Position auf dem Bildschirm, welche Ecken welche werte haben könnt ihr der Illustration unten entnehmen.
+* x, y: Die Position auf dem Bildschirm, welche Ecken welche Werte haben, könnt ihr der Illustration unten entnehmen.
 1,0 .. 1,1
 0,0 .. 1,0
 * Farbe und Grösse vom Text <rendering color="black|white|r,g,b,a" fontSize="[0,1]"/>
-* color: Unterstüzt die folgenden beiden Text Werte: black, white und rgba Farben getrennt durch ein Komma im Bereich [0..1] Beispiel Königsblau "0.25,0.41,0.88,1"
-* fontSize: Die grösse der Schrift, ein wert im Bereich [0..1], Standart ist 0.015. UI Skalierung wird mit einbezogen bei der Darstellung!
+* color: Unterstützt die folgenden beiden Text Werte: black, white und rgba Farben getrennt durch ein Komma im Bereich [0..1] Beispiel Königsblau "0.25,0.41,0.88,1"
+* fontSize: Die Grösse der Schrift, ein Wert im Bereich [0..1], Standard ist 0.015. UI Skalierung wird mit einbezogen bei der Darstellung!
 * Format des Strings (siehe Liste unten)
+
+Position wie auch Schriftgrösse können auch über Konsolen Kommandos gesetzt werden, dies vereinfacht das Positionieren an gewünschter Stelle erheblich
+* vdRealClockPrintCurrentValues -> Zeigt die aktuellen Werte
+* vdRealClockSetPosition 0.9 0.9 -> Setzt die Position auf die gewünschten Werte, sofort sichtbar
+* vdRealClockSetFontSize 0.013 -> Setzt die Schriftgrösse auf den angegebenen Wert, sofort sichtbar
+* vdRealClockResetToDefault -> Setzt die Werte wieder auf Ihren Standartwert zurück
+* vdRealClockSaveSettings -> Speichert die geänderten Daten in der xml im modSettings Ordner
 
 Mögliche Formate
 %a Wochentag abgekürzt (z.B., Wed)
 %A Wochentag ausgeschrieben (z.B., Wednesday)
 %b Monat abgekürzt (z.B., Sep)
 %B Monat ausgeschrieben (z.B., September)
-%c Tag und zeit (z.B., 09/16/98 23:48:10)
-%d Tag des monats (16) [01-31]
+%c Tag und Zeit (z.B., 09/16/98 23:48:10)
+%d Tag des Monats (16) [01-31]
 %H Stunde, 24h modus (23) [00-23]
 %I Stunde, 12h modus (11) [01-12]
 %M Minute (48) [00-59]
@@ -78,14 +94,16 @@ Mögliche Formate
 %X Zeit (e.g., 23:48:10)
 %Y volles Jahr (1998)
 %y zweistelliges Jahr (98) [00-99]
-%% Das Zeichen `%´
+%% das Zeichen `%´
+
+GitHub-Link: https://github.com/VertexDezign/RealClock
 ]]>
         </de>
     </description>
-    <iconFilename>store_clock.png</iconFilename>
-    <multiplayer supported="true" />
+    <iconFilename>icon_clock.png</iconFilename>
+    <multiplayer supported="true"/>
     <extraSourceFiles>
-		<sourceFile filename="GrisuDebug.lua" />
-		<sourceFile filename="RealClock.lua" />
-	</extraSourceFiles>
+        <sourceFile filename="GrisuDebug.lua"/>
+        <sourceFile filename="RealClock.lua"/>
+    </extraSourceFiles>
 </modDesc>
