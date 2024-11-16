@@ -3,6 +3,7 @@
 [![ModHub Download](https://img.shields.io/badge/%5BFS17%5D%20ModHub-2.0.1.0-green.svg?style=flat-square)](https://farming-simulator.com/mod.php?lang=de&country=ch&mod_id=51459&title=fs2017)
 [![ModHub Download](https://img.shields.io/badge/%5BFS19%5D%20ModHub-1.1.1.0-green.svg?style=flat-square)](https://farming-simulator.com/mod.php?lang=de&country=ch&mod_id=117935&title=fs2019)
 [![ModHub Download](https://img.shields.io/badge/%5BFS22%5D%20ModHub-1.0.0.0-blue.svg?style=flat-square)](https://farming-simulator.com/mod.php?mod_id=224748)
+[![ModHub Download](https://img.shields.io/badge/%5BFS25%5D%20ModHub-1.0.0.0-green.svg?style=flat-square)](https://farming-simulator.com/mod.php?mod_id=303705)
 
 A small script, which shows the actual time in the upper right corner.
 
@@ -25,6 +26,13 @@ A small script, which shows the actual time in the upper right corner.
         * fontSize: the size of the font to display, a value in the range [0..1], default 0.015. UI Scale is used for
           calculating the font size to display
     * datetime format (placeholders like here in os.date -> https://www.lua.org/pil/22.1.html)
+    * Position and font size can now also be set with console commands, this makes it a lot easier to position the clock
+      at the wanted position
+        * vdRealClockPrintCurrentValues -> Shows the current values which are used
+        * vdRealClockSetPosition 0.9 0.9 -> Set the position, applies immediately
+        * vdRealClockSetFontSize 0.013 -> Set the font size, applies immediately
+        * vdRealClockResetToDefault -> Set the values back to their defaults
+        * vdRealClockSaveSettings -> Saves the changed values in the xml within the modSettings folder
 
 ## Credits
 
@@ -33,8 +41,8 @@ A small script, which shows the actual time in the upper right corner.
 
 # LICENSE
 
-Copyright (c) 2017-2022 VertexDezign All rights reserved.  
-Copyright (c) 2017-2022 Benjamin Leber All rights reserved.
+Copyright (c) 2017-2024 VertexDezign All rights reserved.  
+Copyright (c) 2017-2024 Benjamin Leber All rights reserved.
 
 This copyright does not impugn any trademarks or copyrights owned by Giants
 
